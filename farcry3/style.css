@@ -1,0 +1,1570 @@
+/* ==============================================
+   Far Cry 3 – Cinematic Interactive Walkthrough
+   ============================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --theme-primary: #cc0000;
+    --theme-secondary: #8B0000;
+    --theme-accent: #ff4400;
+    --theme-bg: #000;
+    --theme-text: #fff;
+    --theme-glass: rgba(255,255,255,0.05);
+    --theme-glass-border: rgba(255,255,255,0.08);
+    --theme-glow: rgba(204,0,0,0.3);
+}
+
+/* ---- Theme: Vaas (Red / Fire) ---- */
+[data-theme="vaas"] {
+    --theme-primary: #ff2200;
+    --theme-secondary: #cc1100;
+    --theme-accent: #ff6622;
+    --theme-glass: rgba(255,30,0,0.06);
+    --theme-glass-border: rgba(255,30,0,0.12);
+    --theme-glow: rgba(255,34,0,0.25);
+}
+
+/* ---- Theme: Tatau (Green / Jungle) ---- */
+[data-theme="tatau"] {
+    --theme-primary: #22cc55;
+    --theme-secondary: #118833;
+    --theme-accent: #44ff77;
+    --theme-glass: rgba(34,204,85,0.06);
+    --theme-glass-border: rgba(34,204,85,0.12);
+    --theme-glow: rgba(34,204,85,0.2);
+}
+
+/* ---- Theme: Psycho (Orange / Hallucination) ---- */
+[data-theme="psycho"] {
+    --theme-primary: #ff8800;
+    --theme-secondary: #cc6600;
+    --theme-accent: #ffaa44;
+    --theme-glass: rgba(255,136,0,0.06);
+    --theme-glass-border: rgba(255,136,0,0.12);
+    --theme-glow: rgba(255,136,0,0.2);
+}
+
+/* ---- Theme: Citra (Purple / Mystic) ---- */
+[data-theme="citra"] {
+    --theme-primary: #aa44ff;
+    --theme-secondary: #7722cc;
+    --theme-accent: #cc66ff;
+    --theme-glass: rgba(170,68,255,0.06);
+    --theme-glass-border: rgba(170,68,255,0.12);
+    --theme-glow: rgba(170,68,255,0.2);
+}
+
+/* ---- Theme: Hoyt (White / Cold) ---- */
+[data-theme="hoyt"] {
+    --theme-primary: #cccccc;
+    --theme-secondary: #999999;
+    --theme-accent: #ffffff;
+    --theme-glass: rgba(200,200,200,0.06);
+    --theme-glass-border: rgba(200,200,200,0.12);
+    --theme-glow: rgba(200,200,200,0.15);
+}
+
+/* ---- Theme: Choice (Split) ---- */
+[data-theme="choice"] {
+    --theme-primary: #ff0044;
+    --theme-secondary: #aa0033;
+    --theme-accent: #ff4488;
+    --theme-glass: rgba(255,0,68,0.06);
+    --theme-glass-border: rgba(255,0,68,0.12);
+    --theme-glow: rgba(255,0,68,0.2);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* ==============================================
+   HERO
+   ============================================== */
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #050300;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 30%, rgba(200,100,20,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 80%, rgba(0,0,0,0.8) 0%, transparent 50%),
+        linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.hero-tagline {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #aa7744;
+    display: block;
+    margin-bottom: 2rem;
+    opacity: 0;
+}
+
+.hero-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    opacity: 0;
+}
+
+.hero-title .line {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.85;
+}
+
+.hero-title .line1 {
+    font-size: clamp(3rem, 12vw, 8rem);
+    color: #cc4400;
+    letter-spacing: clamp(10px, 3vw, 30px);
+    text-shadow: 0 0 80px rgba(204,68,0,0.3), 0 0 160px rgba(204,68,0,0.15);
+}
+
+.hero-title .line2 {
+    font-size: clamp(3.5rem, 14vw, 10rem);
+    color: #ff6600;
+    letter-spacing: clamp(8px, 2.5vw, 25px);
+    text-shadow: 0 0 100px rgba(255,102,0,0.4), 0 0 200px rgba(255,102,0,0.2);
+}
+
+.hero-title .line3 {
+    font-size: clamp(5rem, 20vw, 14rem);
+    color: #ff2200;
+    letter-spacing: clamp(15px, 4vw, 40px);
+    text-shadow: 0 0 120px rgba(255,34,0,0.5), 0 0 240px rgba(255,34,0,0.25);
+}
+
+.hero-sub {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.6rem, 1.2vw, 0.8rem);
+    color: #886644;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    opacity: 0;
+}
+
+.hero-scroll-hint {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: #554433;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 4rem;
+    animation: pulse-hint 2s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes pulse-hint {
+    0%, 100% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 0.8; transform: translateY(8px); }
+}
+
+.hero-jungle-fg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(0deg, rgba(0,10,0,0.6) 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* ==============================================
+   CHAPTERS – Shared
+   ============================================== */
+.chapter {
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.ch-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.chapter[data-theme="vaas"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,30,0,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(200,50,0,0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0200, #000);
+}
+
+.chapter[data-theme="tatau"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(34,204,85,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 50%, rgba(34,204,85,0.04) 0%, transparent 50%),
+        linear-gradient(180deg, #000a02, #000);
+}
+
+.chapter[data-theme="psycho"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 20% 60%, rgba(255,136,0,0.07) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 40%, rgba(255,68,0,0.05) 0%, transparent 40%),
+        linear-gradient(180deg, #0a0500, #000);
+}
+
+.chapter[data-theme="citra"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(170,68,255,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(100,30,180,0.04) 0%, transparent 40%),
+        linear-gradient(180deg, #05000a, #000);
+}
+
+.chapter[data-theme="hoyt"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 50% 30%, rgba(200,200,200,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 70%, rgba(150,150,150,0.03) 0%, transparent 40%),
+        linear-gradient(180deg, #0a0a0a, #000);
+}
+
+.chapter[data-theme="choice"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(255,0,68,0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 50%, rgba(100,0,200,0.05) 0%, transparent 40%),
+        linear-gradient(180deg, #050005, #000);
+}
+
+.ch-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.ch-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.ch-number {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.6rem, 1vw, 0.75rem);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--theme-primary);
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.ch-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    letter-spacing: clamp(6px, 2vw, 15px);
+    text-transform: uppercase;
+    color: var(--theme-primary);
+    text-shadow: 0 0 40px var(--theme-glow);
+    margin-bottom: 0.8rem;
+}
+
+.ch-location {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+    color: #666;
+    letter-spacing: 3px;
+    font-style: italic;
+}
+
+.ch-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.ch-narrative {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.ch-narrative {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.ch-narrative p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    line-height: 1.8;
+    color: #bbb;
+    letter-spacing: 0.5px;
+}
+
+.ch-narrative.centered {
+    text-align: center;
+}
+
+/* ==============================================
+   QUOTE BLOCKS (Glassmorphic)
+   ============================================== */
+.quote-block {
+    background: var(--theme-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--theme-glass-border);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.quote-block::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    font-size: 4rem;
+    color: var(--theme-primary);
+    opacity: 0.15;
+    font-family: serif;
+    line-height: 1;
+}
+
+.quote-speaker {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--theme-primary);
+    display: block;
+    margin-bottom: 0.6rem;
+}
+
+.quote-block .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--theme-text);
+    letter-spacing: 0.5px;
+    font-style: italic;
+}
+
+.quote-block .quote-text span {
+    display: inline;
+    opacity: 0;
+}
+
+.quote-block.centered {
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quote-block.centered::before {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ==============================================
+   CHARACTER IMAGES
+   ============================================== */
+.character-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(45%, 500px);
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.85);
+    clip-path: inset(0 100% 0 0);
+}
+
+.character-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+}
+
+.character-image.right-side {
+    right: 0;
+    left: auto;
+}
+
+.character-image.dual {
+    width: min(28%, 300px);
+}
+
+.character-image.dual.second {
+    right: auto;
+    left: 0;
+}
+
+.character-image.dual.second img {
+    object-position: center 30%;
+}
+
+.character-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.character-image.dual.second::after {
+    background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.6) 100%);
+}
+
+.vignette-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.7) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.5) 100%);
+}
+
+[data-theme="vaas"] .vignette-overlay {
+    background:
+        radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(80,0,0,0.5) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 30%, transparent 70%, rgba(80,0,0,0.3) 100%);
+}
+
+[data-theme="citra"] .vignette-overlay {
+    background:
+        radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(40,0,60,0.5) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 30%, transparent 70%, rgba(40,0,60,0.3) 100%);
+}
+
+[data-theme="psycho"] .vignette-overlay {
+    background:
+        radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(60,30,0,0.5) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 30%, transparent 70%, rgba(60,30,0,0.3) 100%);
+}
+
+[data-theme="tatau"] .vignette-overlay {
+    background:
+        radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(0,40,10,0.5) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 30%, transparent 70%, rgba(0,40,10,0.3) 100%);
+}
+
+[data-theme="hoyt"] .vignette-overlay {
+    background:
+        radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(30,30,30,0.5) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 30%, transparent 70%, rgba(30,30,30,0.3) 100%);
+}
+
+.glitch-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.character-image[data-glitch="true"] .glitch-overlay {
+    animation: glitch-flash 4s steps(1) infinite;
+}
+
+@keyframes glitch-flash {
+    0%, 85%, 100% { opacity: 0; transform: translate(0); }
+    87% { opacity: 0.25; background: rgba(255,0,0,0.25); transform: translate(4px, -2px); }
+    88% { opacity: 0; transform: translate(-3px, 1px); }
+    91% { opacity: 0.12; background: rgba(255,255,255,0.12); transform: translate(2px, -1px); }
+    92% { opacity: 0; transform: translate(0); }
+    95% { opacity: 0.2; background: rgba(255,0,0,0.2); transform: translate(-4px, 2px); }
+    96% { opacity: 0; }
+}
+
+/* ==============================================
+   CHAPTER 1 – The Cage
+   ============================================== */
+.cage-visual {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.cage-bars {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cage-bars::before,
+.cage-bars::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cage-bars::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+        transparent,
+        transparent 8%,
+        rgba(80,60,50,0.12) 8%,
+        rgba(80,60,50,0.12) 8.5%
+    );
+}
+
+.cage-fire {
+    width: 60%;
+    height: 80px;
+    background: radial-gradient(ellipse at 50% 100%, rgba(255,100,0,0.2), transparent 70%);
+    position: absolute;
+    bottom: 0;
+    animation: fire-flicker 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes fire-flicker {
+    0% { opacity: 0.4; transform: scaleY(0.8); }
+    50% { opacity: 0.8; transform: scaleY(1.2); }
+    100% { opacity: 0.5; transform: scaleY(0.9); }
+}
+
+.cage-quotes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ==============================================
+   CHAPTER 2 – Tatau
+   ============================================== */
+.tatau-visual {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.tatau-arm {
+    width: 80px;
+    height: 200px;
+    background: linear-gradient(180deg,
+        rgba(60,40,30,0.3),
+        rgba(80,50,30,0.2)
+    );
+    border-radius: 20px 20px 10px 10px;
+    position: relative;
+    border: 1px solid rgba(34,204,85,0.1);
+    overflow: hidden;
+}
+
+.tatau-arm::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(34,204,85,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 40%, rgba(34,204,85,0.12) 0%, transparent 40%),
+        radial-gradient(circle at 40% 60%, rgba(34,204,85,0.18) 0%, transparent 45%),
+        radial-gradient(circle at 70% 80%, rgba(34,204,85,0.1) 0%, transparent 40%);
+}
+
+/* ==============================================
+   CHAPTER 3 – Psychopaths
+   ============================================== */
+.psycho-card {
+    background: var(--theme-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--theme-glass-border);
+    border-radius: 4px;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.psycho-portrait {
+    width: 100px;
+    height: 130px;
+    border-radius: 2px;
+    border: 1px solid var(--theme-glass-border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.psycho-initials {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: var(--theme-primary);
+    opacity: 0.4;
+    letter-spacing: 4px;
+}
+
+.psycho-info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--theme-primary);
+    letter-spacing: 3px;
+    margin-bottom: 0.3rem;
+}
+
+.psycho-role {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    color: #666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.psycho-info .quote-block {
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+    background: rgba(0,0,0,0.3);
+}
+
+.psycho-info .quote-block .quote-text {
+    font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+}
+
+/* ==============================================
+   CHAPTER 4 – Citra
+   ============================================== */
+.citra-presence {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.citra-glow {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(170,68,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: citra-pulse 4s ease-in-out infinite;
+}
+
+@keyframes citra-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+}
+
+/* ==============================================
+   CHAPTER 5 – Hoyt (Poker Table)
+   ============================================== */
+.poker-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 0;
+    position: relative;
+}
+
+.poker-card {
+    width: 60px;
+    height: 84px;
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    border: 1px solid #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--theme-primary);
+    font-family: 'Cinzel', serif;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.poker-chip {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #888, #222);
+    border: 2px dashed #555;
+    position: absolute;
+    bottom: 10px;
+    right: 30%;
+    opacity: 0;
+}
+
+/* ==============================================
+   CHAPTER 6 – The Choice (Split Screen)
+   ============================================== */
+.final-chapter .ch-body {
+    gap: 2rem;
+}
+
+.split-choice {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    min-height: 350px;
+    position: relative;
+}
+
+.choice-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid var(--theme-glass-border);
+    background: var(--theme-glass);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: flex 0.6s ease;
+}
+
+.choice-side:hover {
+    flex: 1.4;
+}
+
+.choice-side.left-choice {
+    border-right: none;
+}
+
+.choice-side.right-choice {
+    border-left: none;
+}
+
+.choice-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.6s ease;
+}
+
+.left-choice .choice-overlay {
+    background: radial-gradient(ellipse at 50% 100%, rgba(0,100,200,0.15), transparent 70%);
+    opacity: 0;
+}
+
+.right-choice .choice-overlay {
+    background: radial-gradient(ellipse at 50% 0%, rgba(170,68,255,0.15), transparent 70%);
+    opacity: 0;
+}
+
+.choice-side:hover .choice-overlay {
+    opacity: 1;
+}
+
+.choice-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.choice-content h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--theme-primary);
+    margin-bottom: 1rem;
+}
+
+.choice-content p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.choice-hint {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    color: #555;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.choice-side:hover .choice-hint {
+    opacity: 1;
+    color: var(--theme-primary);
+}
+
+.choice-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 3;
+}
+
+.divider-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #555;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+}
+
+.final-quote {
+    text-align: center;
+    padding: 2rem;
+    opacity: 0;
+}
+
+.final-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+    color: #555;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* ==============================================
+   SHAKE ANIMATION (triggered by JS)
+   ============================================== */
+.shake-active #ch-cage .ch-inner,
+.shake-active #ch-hoyt .ch-inner {
+    animation: screen-shake 0.15s ease-in-out 6;
+}
+
+@keyframes screen-shake {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-4px, 3px); }
+    40% { transform: translate(4px, -3px); }
+    60% { transform: translate(-3px, -4px); }
+    80% { transform: translate(3px, 4px); }
+}
+
+/* ==============================================
+   THEME: Weapons (Gunmetal / Steel)
+   ============================================== */
+[data-theme="weapons"] {
+    --theme-primary: #8899aa;
+    --theme-secondary: #556677;
+    --theme-accent: #aabbcc;
+    --theme-glass: rgba(136,153,170,0.06);
+    --theme-glass-border: rgba(136,153,170,0.12);
+    --theme-glow: rgba(136,153,170,0.2);
+}
+
+[data-theme="weapons"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(80,100,120,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 70%, rgba(60,80,100,0.04) 0%, transparent 40%),
+        linear-gradient(180deg, #050607, #000);
+}
+
+/* ==============================================
+   THEME: Expedition (Sepia / Old Map)
+   ============================================== */
+[data-theme="expedition"] {
+    --theme-primary: #cc9944;
+    --theme-secondary: #997733;
+    --theme-accent: #ddbb66;
+    --theme-glass: rgba(204,153,68,0.06);
+    --theme-glass-border: rgba(204,153,68,0.12);
+    --theme-glow: rgba(204,153,68,0.2);
+}
+
+[data-theme="expedition"] .ch-bg {
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(180,140,60,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 70%, rgba(120,80,30,0.04) 0%, transparent 40%),
+        linear-gradient(180deg, #080603, #000);
+}
+
+.map-bg {
+    background-image: url('assets/images/map_bg.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 1.5s ease, filter 1.5s ease;
+}
+
+.map-bg.revealed {
+    opacity: 0.15;
+    filter: blur(3px);
+}
+
+/* ==============================================
+   WEAPONS SECTION
+   ============================================== */
+.weapons-container {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.weapon-card {
+    background: var(--theme-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--theme-glass-border);
+    border-radius: 4px;
+    padding: 2rem;
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.weapon-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.3);
+    border-radius: 2px;
+}
+
+.weapon-image img {
+    max-width: 80%;
+    max-height: 85%;
+    object-fit: contain;
+    display: block;
+}
+
+.dagger-wrapper {
+    position: relative;
+}
+
+.dagger-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(0,255,255,0.2), transparent 60%);
+    mix-blend-mode: screen;
+}
+
+#weapon-dagger:hover .dagger-glow {
+    opacity: 1;
+}
+
+.weapon-info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--theme-primary);
+    letter-spacing: 3px;
+    margin-bottom: 0.3rem;
+}
+
+.weapon-type {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    color: #666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.weapon-info p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
+    line-height: 1.7;
+    color: #999;
+}
+
+.weapon-legend {
+    color: #bb9944 !important;
+    font-style: italic;
+    border-left: 2px solid rgba(204,153,68,0.3);
+    padding-left: 1rem;
+}
+
+/* ==============================================
+   EXPEDITION SECTION
+   ============================================== */
+.expedition-narrative {
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.expedition-narrative p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    line-height: 1.8;
+    color: #bbb;
+    margin-bottom: 1.2rem;
+}
+
+.treasure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.treasure-item {
+    background: var(--theme-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--theme-glass-border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.treasure-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.treasure-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: var(--theme-primary);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.treasure-item p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+    color: #888;
+    line-height: 1.6;
+}
+
+/* ==============================================
+   SPLIT SCREEN (THE CHOICE)
+   ============================================== */
+.split-screen {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 450px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+}
+
+.split-side {
+    flex: 1 1 50%;
+    width: 50%;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.split-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.split-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.split-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+.left-overlay {
+    background: linear-gradient(135deg, rgba(0,20,60,0.88), rgba(0,60,120,0.75));
+}
+
+.right-overlay {
+    background: linear-gradient(135deg, rgba(80,0,0,0.88), rgba(140,20,0,0.75));
+}
+
+.split-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 350px;
+}
+
+.split-content h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.left-split .split-content h3 {
+    color: #4488cc;
+}
+
+.right-split .split-content h3 {
+    color: #cc3333;
+}
+
+.split-content p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.split-hint {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.split-side:hover .split-hint {
+    color: var(--theme-primary);
+}
+
+.split-divider {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.split-divider-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: #888;
+}
+
+/* ==============================================
+   ENDING OVERLAYS
+   ============================================== */
+.ending-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.ending-overlay.active {
+    display: flex;
+}
+
+.ending-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.friends-bg {
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(0,50,100,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 80%, rgba(0,20,60,0.4) 0%, transparent 50%),
+        linear-gradient(180deg, #000a1a, #000205);
+}
+
+.citra-bg {
+    background:
+        radial-gradient(ellipse at 50% 30%, rgba(100,0,0,0.7) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 70%, rgba(60,0,0,0.5) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0000, #000);
+}
+
+.ending-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+.ending-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 2.8vw, 2rem);
+    line-height: 1.8;
+    color: #ccc;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+#citra-ending .ending-quote {
+    color: #cc5555;
+    text-shadow: 0 0 30px rgba(200,0,0,0.3);
+}
+
+/* ==============================================
+   CREDITS SCREEN
+   ============================================== */
+#credits-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    background: #000;
+    overflow: hidden;
+}
+
+#credits-screen.active {
+    display: block;
+}
+
+.credits-scroll {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    padding: 2rem;
+    will-change: transform;
+}
+
+.credits-content h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #ff6600;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    text-shadow: 0 0 40px rgba(255,102,0,0.3);
+    margin-bottom: 0.5rem;
+}
+
+.credits-content h3 {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.65rem, 1.4vw, 0.9rem);
+    color: #886644;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.credit-role {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.55rem, 1vw, 0.7rem);
+    color: #555;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+}
+
+.credit-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    color: #aa7744;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.credit-thanks {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+    color: #cc8844;
+    font-style: italic;
+    letter-spacing: 2px;
+}
+
+.credit-thanks-sub {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.55rem, 1vw, 0.75rem);
+    color: #555;
+    letter-spacing: 3px;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+/* ==============================================
+   CREDITS SOCIAL / REPLAY
+   ============================================== */
+.credit-social {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+    color: #cc8844;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    display: inline-block;
+    margin-top: 0.3rem;
+}
+
+.credit-social:hover {
+    color: #ffaa66;
+    text-shadow: 0 0 24px rgba(255,170,102,0.4);
+}
+
+#replay-overlay {
+    position: fixed;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+#replay-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.replay-question {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.replay-btn {
+    display: inline-block;
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.6rem, 1vw, 0.75rem);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #888;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    animation: replay-pulse 3s ease-in-out infinite;
+}
+
+.replay-btn:hover {
+    color: #ff6600;
+    border-color: rgba(255,102,0,0.3);
+    background: rgba(255,102,0,0.06);
+    animation: none;
+}
+
+@keyframes replay-pulse {
+    0%, 100% { border-color: rgba(255,255,255,0.08); }
+    50% { border-color: rgba(255,102,0,0.2); }
+}
+
+/* ==============================================
+   SITE FOOTER
+   ============================================== */
+.site-footer {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    background: #000;
+}
+
+.footer-text {
+    font-family: 'Courier Prime', monospace;
+    font-size: clamp(0.55rem, 1vw, 0.7rem);
+    color: #555;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.footer-instagram {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.75rem, 1.3vw, 0.95rem);
+    color: #cc8844;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer-instagram:hover {
+    color: #ffaa66;
+    text-shadow: 0 0 24px rgba(255,170,102,0.4);
+}
+
+.footer-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.5rem, 0.8vw, 0.6rem);
+    color: #444;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+@media (max-width: 1024px) {
+    .character-image { width: min(35%, 250px); }
+    .character-image.dual { width: min(22%, 180px); }
+
+    .psycho-card { flex-direction: column; align-items: center; text-align: center; }
+    .psycho-portrait { width: 80px; height: 100px; }
+    .split-choice { flex-direction: column; min-height: auto; }
+    .choice-divider { width: 100%; height: 30px; }
+    .divider-text { writing-mode: horizontal-tb; text-orientation: mixed; }
+    .choice-side { min-height: 200px; }
+    .choice-side:hover { flex: 1; }
+}
+
+@media (max-width: 768px) {
+    .character-image { width: min(40%, 200px); }
+    .character-image.dual { display: none; }
+
+    .chapter { padding: 3rem 1rem; }
+    .quote-block { padding: 1rem 1.2rem; }
+    .quote-block::before { font-size: 2.5rem; top: -5px; left: 8px; }
+    .psycho-card { gap: 1rem; padding: 1.2rem; }
+    .poker-card { width: 45px; height: 63px; font-size: 1rem; }
+    .cage-quotes { gap: 1rem; }
+    .choice-side { min-height: 180px; padding: 1.5rem; }
+    .choice-content h3 { font-size: clamp(1rem, 4vw, 1.3rem); letter-spacing: 3px; }
+
+    /* Weapons stack vertically */
+    .weapons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .weapon-card {
+        min-width: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    .weapon-image { height: 180px; }
+
+    /* Split-screen vertical stacking with height flex for tap effect */
+    .split-screen {
+        flex-direction: column;
+        height: 70vh;
+        min-height: 420px;
+        max-height: 650px;
+    }
+    .split-side {
+        width: 100% !important;
+        flex: 1 1 50%;
+        min-height: 0;
+    }
+    .split-divider {
+        position: static;
+        transform: none;
+        margin: 0 auto;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+    }
+    .split-content h3 { font-size: clamp(1rem, 4vw, 1.3rem); letter-spacing: 4px; }
+    .split-content { padding: 1.2rem; }
+    .ch-body { gap: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    .character-image { display: none; }
+
+    .poker-table { gap: 0.5rem; }
+    .poker-card { width: 35px; height: 50px; font-size: 0.8rem; }
+    .psycho-card { padding: 1rem; }
+
+    .weapon-image { height: 150px; }
+    .weapon-legend { font-size: 0.8rem; padding-left: 0.6rem; }
+    .expedition-narrative p { font-size: 0.85rem; }
+    .treasure-item { padding: 1rem; }
+    .treasure-icon { font-size: 1.5rem; }
+
+    .split-screen { height: 60vh; min-height: 350px; max-height: 500px; }
+    .split-side { min-height: 0; }
+    .split-content { padding: 1rem; }
+    .split-content h3 { font-size: clamp(0.9rem, 5vw, 1.1rem); letter-spacing: 3px; }
+    .split-content p { font-size: 0.8rem; }
+    .split-hint { font-size: 0.5rem; }
+}
